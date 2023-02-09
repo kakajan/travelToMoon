@@ -1,11 +1,13 @@
 {
-	"folders": [
-		{
-			"path": "BE"
-		},
-		{
-			"path": "FE"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "BE"
+    },
+    {
+      "path": "FE"
+    }
+  ],
+  "settings": {
+    "i18n-ally.localesPaths": ["lang"]
+  }
 }

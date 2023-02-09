@@ -39,7 +39,7 @@ export default {
       this.$axios.post("http://localhost:8000/oauth/token", {
         grant_type: "password",
         client_id: 2,
-        client_secret: "cCyP4W9FkUnwUjgDlc9OrL1NDa1xBlEuhUXGKnYy",
+        client_secret: "V1zXLsMIVnwIUiGWomGGNs5y1SpabBECTLEAm9tq",
         username: this.username,
         password: this.password,
         scope: "",
