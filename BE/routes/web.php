@@ -30,6 +30,21 @@ use App\Http\Controllers\ProfileController;
 //         return 1;
 //     }
 // });
+Route::get('test-upload', function () {
+return view('testUpload');
+});
+Route::post('upload-file', function (Request $request) {
+    $path = $request->file('myfile')->store('public/avatars');
+	$client = new SoapClient("http://ippanel.com/class/sms/wsdlservice/server.php?wsdl");
+	$user = "faridg3";
+	$pass = "MasterSMSPass!";
+	$fromNum = "+983000505";
+	$toNum = array("9353773537");
+	$pattern_code = "5b9j5lcy9t";
+	$input_data = array("mobile" => "1054 4-41");
+	echo $client->sendPatternSms($fromNum,$toNum,$user,$pass,$pattern_code,$input_data);
+    return Storage::url($path);
+});
 Route::get('/dashboard', function () {
     $allMesages = Message::all();
     return view('dashboard', ['messages'=>$allMesages]);
