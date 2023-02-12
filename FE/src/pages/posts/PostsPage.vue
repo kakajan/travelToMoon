@@ -94,8 +94,8 @@ export default {
   },
   methods: {
     toggleLike(index) {
-      if (this.posts[index].likes.length > 0) {
-        api.delete("api/likes/" + this.posts[index].likes[0].id).then((r) => {
+      if (this.posts[index].liked) {
+        api.delete("api/likes/" + this.posts[index].id).then((r) => {
           if (r.data === 1) {
             this.posts[index].liked = false;
           }

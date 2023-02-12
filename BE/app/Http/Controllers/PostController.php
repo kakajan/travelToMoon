@@ -18,7 +18,8 @@ class PostController extends Controller
         $posts = Post::all();
         foreach ($posts as $post) {
             $post->likeCount = $post->likes->count();
-            if($post->likes->where('user_id', $request->user()->id)->first()){
+            //return $post->likes;
+            if($post->likes->where('id', $request->user()->id)->first()){
                 $liked = true;
             } else {
                 $liked = false;
@@ -49,6 +50,7 @@ class PostController extends Controller
         $newPost = new Post;
         $newPost->title = $request->title;
         $newPost->content = $request->content;
+        $newPost->user_id = $request->user()->id;
         $newPost->save();
         return $newPost;
     }

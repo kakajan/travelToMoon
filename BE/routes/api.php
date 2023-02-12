@@ -27,13 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('register', function (Request $request) {
     $pass = rand(1111, 9999);
-    Mail::to($request->email)->send(new SendPassword($pass));
+    //Mail::to($request->email)->send(new SendPassword($pass));
     $user = new User;
     $user->name = $request->Kertop;
     $user->email = $request->email;
     $user->password = Hash::make($pass);
     $user->save();
-    return $user;
+    return $pass;
 });
 Route::middleware('auth:api')->resource('posts', PostController::class);
 Route::middleware('auth:api')->resource('likes', LikeController::class);

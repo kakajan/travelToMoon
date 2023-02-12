@@ -46,6 +46,9 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+    public function likes(){
+        return $this->belongsToMany(Post::class, 'likes');
+    }
     /**
      * Get the profile associated with the User
      *

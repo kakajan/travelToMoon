@@ -35,10 +35,7 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        $like = new Like;
-        $like->post_id = $request->post_id;
-        $like->user_id = $request->user()->id;
-        $like->save();
+        $request->user()->likes()->attach($request->post_id);
         return true;
     }
 
@@ -82,9 +79,9 @@ class LikeController extends Controller
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy(Request $request, $id)
     {
-        $like->delete();
+        $request->user()->likes()->detach($id);
         return 1;
     }
 }

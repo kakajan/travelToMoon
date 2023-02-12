@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { api } from 'src/boot/axios';
 export default {
   // name: 'PageName',
   data() {
@@ -40,7 +41,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$axios
+      api
         .post("http://localhost:8000/api/posts", {
           title: this.title,
           content: this.content,
