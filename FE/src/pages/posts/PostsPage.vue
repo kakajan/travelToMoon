@@ -30,6 +30,9 @@
             </span>
             <span v-else>پروفایل ندارد</span>
           </q-card-section>
+          <q-img v-if="post.image!==null" :src="post.image.url" />
+          <q-img v-else src="/noimage.jpg" />
+          <video controls v-if="post.medias.length>0"  :src="post.medias[0].url"></video>
           <q-card-section>
             {{ post.content }}
           </q-card-section>
