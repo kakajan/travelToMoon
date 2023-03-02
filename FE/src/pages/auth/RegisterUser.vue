@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <!-- content -->
+    {{ counter }}
     <div class="row justify-center">
       <div class="col-8">
         <h2 class="text-weight-bolder text-h5">فرم ثبت نام</h2>
@@ -40,8 +41,31 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import {useCounterStore} from 'stores/userData'
+import { storeToRefs } from 'pinia';
 export default {
   // name: 'PageName',
+  setup () {
+    const store = useCounterStore();
+    const doubleCountValue = computed(() => store.doubleCount);
+    const decrementCount = () => { if (store.counter > 0) { store.counter-- } };
+    function doubleIt () {
+      store.doubleCount
+      console.log(doubleCountValue.value);
+    }
+    const { counter, doubleCount } = storeToRefs(store);
+    const { increment } = store;
+    return {
+      store,
+      doubleCountValue,
+      doubleIt,
+      decrementCount,
+      counter,
+      doubleCount,
+      increment
+    }
+  },
   data() {
     return {
       fullName: null,
