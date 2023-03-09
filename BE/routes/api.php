@@ -1,15 +1,13 @@
 <?php
 
-use App\Models\Post;
-use App\Models\User;
-use App\Mail\SendPassword;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +35,9 @@ Route::post('register', function (Request $request) {
 });
 Route::middleware('auth:api')->resource('posts', PostController::class);
 Route::middleware('auth:api')->resource('likes', LikeController::class);
-Route::get('/init', [DashController::class, 'initData']);
+Route::middleware('auth:api')->get('/init', [DashController::class, 'initData']);
+Route::middleware('auth:api')->get('/follow/{id}', function ($id) {
+    $user = auth()->user(); // get the authenticated user
+    $otherUser = User::find($id); // get the user to follow
+    $user->follow($otherUser);
+});

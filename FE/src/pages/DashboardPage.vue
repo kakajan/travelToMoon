@@ -43,6 +43,37 @@
           </q-card-actions>
         </q-card>
       </div>
+      <div class="col-12">
+        <div class="row q-col-gutter-sm">
+      <div
+        class="col-xs-12 col-sm-12 col-md-6 col-lg-3"
+        v-for="(user, index) in dashInfo.usersList"
+        :key="'post-' + index + 1"
+      >
+        <q-card>
+          <q-card-section class="bg-orange">
+            <q-avatar v-if="user.profile">
+              <img :src="user.profile.avatar" />
+            </q-avatar>
+            <q-avatar v-else>
+              <img
+                src="https://www.eastendprep.org/wp-content/uploads/2016/06/noavatar.jpg"
+              />
+            </q-avatar>
+            #{{ user.id }} {{ user.name }}<br />
+            <span v-if="user.profile">
+              {{ user.profile.fullName }}
+            </span>
+            <span v-else>پروفایل ندارد</span>
+          </q-card-section>
+          <q-card-actions align="between">
+            <q-btn @click="follow(user.id)" label="follow" />
+
+          </q-card-actions>
+        </q-card>
+      </div>
+    </div>
+      </div>
     </div>
   </q-page>
 </template>
@@ -57,8 +88,17 @@ export default {
         postMeta: {
           postCount: 0,
         },
+        usersList: []
       },
     };
+  },
+  methods: {
+    follow (id) {
+      api.get('api/follow/' + id)
+        .then(r => {
+        console.log(r.data);
+      })
+    }
   },
   created() {
     api
